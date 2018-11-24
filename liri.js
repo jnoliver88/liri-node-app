@@ -16,44 +16,44 @@ var Spotify = require('node-spotify-api');
 //require to convert date using moment.js
 var moment = require('moment');
 
-//gets Spotify/OMDB/Bands in town from key.js file//
-var Spotify = new Spotify(keys.SPOTIFY_ID);
-
 //command line arguments//
-var text = process.argv[2];
+var command = process.argv[2]; 
+var artist = process.argv[3];
+var spotify = new Spotify(keys.spotify);
+
+//var spotify = new Spotify({
+    //id:'50108489e3f34819a5af4c4fafbf83d3',
+    //secret:f21f0eb97e3c47118ef9f0dff6a17bf7
+
+ // });
+
+// Grab the axios package...
+// Run the axios.get function...
+// The axios.get function takes in a URL and returns a promise (just like $.ajax)
+//need to create a function to pull Spotify concert this information//
+
+var axios = require("axios");
+
+function doSpotify() {
+    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+  .then(function(response) {
+    // If the axios was successful...
+    // Then log the body from the site!
+    //console.log(response.data);
+    console.log(`
+        location: ${response.data[0].venue.country}, ${response.data[0].venue.city}
+    `)
+
+    //need to console log venue name/location/date of event//
+    //console.log("Venue name" + result.venue.name);
+  })
+}
+
+  //need help to create the argument for the command line//
+  
+    if(command === 'concert-this') {
+        doSpotify();
+  }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = Spotify;
-
-console.log("SPOTIFY_ID: " + process.env.SPOTIFY_ID);
-console.log("SPOTIFY_SECRET: " + process.env.SPOTIFY_SECRET);
 
