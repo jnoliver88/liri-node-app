@@ -20,6 +20,7 @@ var moment = require('moment');
 var command = process.argv[2]; 
 var artist = process.argv[3];
 var spotify = new Spotify(keys.spotify);
+var movie = newMovie;
 
 //var spotify = new Spotify({
     //id:'50108489e3f34819a5af4c4fafbf83d3',
@@ -41,19 +42,23 @@ function doSpotify() {
     // Then log the body from the site!
     //console.log(response.data);
     console.log(`
-        location: ${response.data[0].venue.country}, ${response.data[0].venue.city}
+        location: ${response.data[0].venue.country}, ${response.data[0].venue.city}, 
     `)
-
-    //need to console log venue name/location/date of event//
-    //console.log("Venue name" + result.venue.name);
   })
 }
 
   //need help to create the argument for the command line//
-  
     if(command === 'concert-this') {
         doSpotify();
+  };
+
+  function newMovie(){
+  axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
+  function(response) {
+    console.log("The movie's rating is: " + response.data.imdbRating);
   }
-
-
-
+);
+  if(command === 'movie-this'){
+      newMovie();
+  }
+};
